@@ -1,0 +1,59 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="_442.OtherPages.Settings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False" BackKeyPress="PhoneApplicationPage_BackKeyPress">
+
+    <!--LayoutRoot contains the root grid where all other page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <Grid.Background>
+            <ImageBrush ImageSource="/442;component/Images/Styling/Background.png" />
+        </Grid.Background>
+        <phone:Panorama Title="Settings">
+
+            <!--Panorama item one-->
+            <phone:PanoramaItem Header="Competions">
+                <Grid>
+                    <!--BPL, FA, AFCON, LaLiga, Bundesliga, Absa,
+                    League1, SerieA, UEFA, UEFA_Euro, Copa -->
+                   <ListBox>
+                        <CheckBox Name="BoxBpl" Content="BPL" />
+                        <CheckBox  Name="BoxLaLiga"  Content="LaLiga" />
+                        <CheckBox  Name="BoxBundesliga"  Content="Bundesliga" />
+                        <CheckBox  Name="BoxLeague1"  Content="League1" />
+                        <CheckBox  Name="BoxSerieA"  Content="SerieA" />
+                        <CheckBox  Name="BoxUefa"  Content="UEFA" />
+                        <CheckBox  Name="BoxAbsa"  Content="Absa" />
+
+                    </ListBox>
+                </Grid>
+            </phone:PanoramaItem>
+
+            <!--Panorama item two-->
+            <phone:PanoramaItem Header="Categories">
+                <Grid>
+                    <!-- Log, Live, Fixture, Score, Result -->
+                    <ListBox>
+                        <CheckBox Name="BoxLog" Content="Logs" />
+                        <CheckBox  Name="BoxLive"  Content="Live Games" />
+                        <CheckBox  Name="BoxFixture"  Content="Fixtures" />
+                        <CheckBox  Name="BoxScore"  Content="Goal Scorers" />
+                        <CheckBox  Name="BoxResult"  Content="Results" />
+
+
+                    </ListBox>
+                </Grid>
+            </phone:PanoramaItem>
+        </phone:Panorama>
+    </Grid>
+
+</phone:PhoneApplicationPage>

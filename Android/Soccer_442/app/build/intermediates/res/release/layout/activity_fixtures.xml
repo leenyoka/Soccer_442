@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:layout_gravity="center"
+            android:textColor="#FCFAFA"
+            android:text="Fixtures(offline)"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/competitionName"
+            android:layout_gravity="center"
+            android:textColor="#FCFAFA"
+            android:text="Competition Name"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+
+            android:id="@+id/fixtureListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+    </LinearLayout>
+    <TextView android:id="@+id/comm_empty_fixture"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="There are no fixtures."
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        />
+</LinearLayout><!-- From: file:/C:/Development/Android/Soccer_442/app/src/main/res/layout/activity_fixtures.xml -->

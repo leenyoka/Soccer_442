@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/title"
+            android:textColor="#FCFAFA"
+            android:text="Log(offline)"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/competitionName"
+            android:layout_gravity="center"
+            android:textColor="#FCFAFA"
+            android:text="Competition Name"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:background="@drawable/panel"
+            android:padding="5dp"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:weightSum="8">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+                <TextView
+                    android:id="@+id/entry"
+                    android:layout_width="7dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="12sp"
+                    android:layout_gravity="center"
+                    android:textColor="#FCFAFA"
+                    android:layout_marginLeft="10dp"
+                    android:textStyle="bold"
+                    android:layout_weight="4"/>
+
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/p"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="P"
+                android:textSize="11sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="1dp"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:textColor="#FCFAFA"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/w"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="W"
+                android:textSize="11sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="1dp"
+                android:paddingLeft="5dp"
+                android:textColor="#FCFAFA"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/gd"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="GD"
+                android:textSize="11sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="1dp"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:textColor="#FCFAFA"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/points"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="POINTS"
+                android:textSize="11sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"
+                android:paddingLeft="5dp"
+                android:textColor="#FCFAFA"
+                android:layout_weight="1"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+
+            android:id="@+id/logListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ListView>
+
+    </LinearLayout>
+
+    <TextView android:id="@+id/comm_empty_log"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="There are no fixtures."
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        />
+</LinearLayout><!-- From: file:/C:/Development/Android/Soccer_442/app/src/main/res/layout/activity_log.xml -->

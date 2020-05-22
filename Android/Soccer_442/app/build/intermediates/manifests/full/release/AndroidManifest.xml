@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.oms.lindanyoka.soccer_442"
+    android:versionCode="9"
+    android:versionName="1.3" >
+
+    <uses-sdk
+        android:minSdkVersion="11"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature android:name="android.hardware.wifi" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.Home"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.home" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.results_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.results_activity" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.settings_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.settings_activity" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.fixtures_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.fixtures_activity" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.summary_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.log_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.log_activity" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.scorer_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.scorer_activity" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.live_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.live_activity" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.activity_live_commentry"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.activity_live_commentry" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.activity_past_commentry"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.activity_past_commentry" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.activity_competition_menu"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.activity_competition_menu" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.news_activity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.news_activity" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.oms.lindanyoka.soccer_442.activity_news_article"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.activity_news_article" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

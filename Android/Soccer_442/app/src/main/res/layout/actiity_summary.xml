@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="10dp">
+        <ImageView
+            android:id="@+id/online"
+            android:visibility="gone"
+            android:layout_gravity="right"
+            android:src="@drawable/online"
+            android:layout_width="10dp"
+            android:layout_height="10dp" />
+        <ImageView
+            android:id="@+id/offline"
+            android:layout_gravity="right"
+            android:src="@drawable/offline"
+            android:layout_width="10dp"
+            android:layout_height="10dp" />
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:background="@drawable/panel">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/panel"
+            android:orientation="vertical">
+         <Spinner
+
+             android:id="@+id/competionSpinner"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent"
+             android:entries="@array/comp_arrays"
+             android:prompt="@string/comp_prompt">
+
+             </Spinner>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="10dp">
+
+    </LinearLayout>
+        <LinearLayout
+            android:id="@+id/logLayout"
+            android:onClick="Logs"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@drawable/panel">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:background="@drawable/panel"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:weightSum="8">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4">
+                    <TextView
+                        android:id="@+id/entry"
+                        android:layout_width="7dp"
+                        android:layout_height="wrap_content"
+                        android:text="Log"
+                        android:textSize="12sp"
+                        android:layout_gravity="center"
+                        android:textColor="#FCFAFA"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:layout_weight="4"/>
+
+
+                </LinearLayout>
+
+
+
+                <TextView
+                    android:id="@+id/p"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="P"
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:textColor="#FCFAFA"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/w"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="W"
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="#FCFAFA"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/gd"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="GD"
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:textColor="#FCFAFA"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/points"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="POINTS"
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="#FCFAFA"
+                    android:layout_weight="1"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:id="@+id/logListView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+            </ListView>
+        </LinearLayout>
+        <TextView android:id="@+id/comm_empty_log"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="There are no fixtures."
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/spacer_log"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+
+            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/fixtureLayout"
+            android:onClick="Fixtures"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            android:background="@drawable/panel">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ListView
+                    android:id="@+id/fixtureListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+
+            </LinearLayout>
+            <TextView android:id="@+id/comm_empty_fixture"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="There are no fixtures."
+                android:visibility="gone"
+                android:layout_margin="10dp"
+                />
+            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/spacer_fixture"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/liveLayout"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:onClick="Live"
+            android:clickable="true"
+            android:orientation="vertical"
+            android:background="@drawable/panel">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ListView
+
+                    android:id="@+id/liveListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+
+            </LinearLayout>
+            <TextView android:id="@+id/comm_empty_live"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="There are no live games."
+                android:visibility="gone"
+                android:layout_margin="10dp"
+                />
+            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/spacer_live"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/resultLayout"
+            android:onClick="Results"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:orientation="vertical"
+            android:background="@drawable/panel">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ListView
+
+                    android:id="@+id/resultsListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+
+            </LinearLayout>
+            <TextView android:id="@+id/comm_empty_results"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="There is no commentary for this game yet."
+                android:visibility="gone"
+                android:layout_margin="10dp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/spacer_result"
+            android:layout_width="match_parent"
+            android:layout_height="10dp">
+
+        </LinearLayout>
+        <LinearLayout
+        android:id="@+id/scorersLayout"
+        android:onClick="Scorers"
+        android:clickable="true"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:orientation="vertical"
+        android:background="@drawable/panel">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:background="@drawable/panel"
+                android:padding="5dp"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:weightSum="8">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4">
+                    <TextView
+
+                        android:layout_width="7dp"
+                        android:layout_height="wrap_content"
+                        android:text="Scorers"
+                        android:textSize="12sp"
+                        android:layout_gravity="center"
+                        android:textColor="#FCFAFA"
+                        android:layout_marginLeft="10dp"
+                        android:textStyle="bold"
+                        android:layout_weight="4"/>
+
+
+                </LinearLayout>
+
+
+
+
+
+                <TextView
+
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="#FCFAFA"
+                    android:layout_weight="1"/>
+
+                <TextView
+
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="1dp"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:textColor="#FCFAFA"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:id="@+id/goals"
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="GOALS"
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:paddingLeft="5dp"
+                    android:textColor="#FCFAFA"
+                    android:layout_weight="1"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+
+                android:id="@+id/scorerListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+
+        </LinearLayout>
+
+        <TextView android:id="@+id/comm_empty_scorer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="There are no fixtures."
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/spacer_scorer"
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/news"
+        android:background="@drawable/panel"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="10dp"
+        android:onClick="News"
+        android:clickable="true"
+        android:layout_height="58dp">
+
+        <ImageView
+            android:id="@+id/newsImage"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <LinearLayout
+
+            android:background="@drawable/panel"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/newsTitle"
+
+                android:text="News title"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/spacer_news"
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
+
+    </LinearLayout>
+    <LinearLayout
+        android:background="@drawable/panel"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <Button
+            android:id="@+id/btnCommentary"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:layout_margin="10dp"
+            android:onClick="Settings"
+            android:background="@drawable/green_button_selected"
+            android:text="Settings" />
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

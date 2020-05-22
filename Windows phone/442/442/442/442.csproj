@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0703F0C8-13D4-460A-81E7-38CA30BA8314}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_442</RootNamespace>
+    <AssemblyName>442</AssemblyName>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>
+    </SilverlightVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>442_$(Configuration)_$(Platform).xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>_442.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget />
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget />
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <PlatformTarget />
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <PlatformTarget />
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604" />
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\..\..\..\..\..\workspace\Maxxor\NewMediaPublishing\RugbyStatsApp\WindowsPhone8\VodacomSuperRugbyPlayerStats\VodacomSuperRugbyPlayerStats.Models\Bin\Debug\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Extensions">
+      <HintPath>..\..\..\..\..\..\..\workspace\Maxxor\NewMediaPublishing\RugbyStatsApp\WindowsPhone8\VodacomSuperRugbyPlayerStats\VodacomSuperRugbyPlayerStats.Models\Bin\Debug\System.Net.Http.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives">
+      <HintPath>..\..\..\..\..\..\..\workspace\Maxxor\NewMediaPublishing\RugbyStatsApp\WindowsPhone8\VodacomSuperRugbyPlayerStats\VodacomSuperRugbyPlayerStats.Models\Bin\Debug\System.Net.Http.Primitives.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\AppConfig.cs" />
+    <Compile Include="Api\Competition.cs" />
+    <Compile Include="Api\Models\Comment.cs" />
+    <Compile Include="Api\Models\Fixture.cs" />
+    <Compile Include="Api\Models\Live.cs" />
+    <Compile Include="Api\Models\LogItem.cs" />
+    <Compile Include="Api\Models\Result.cs" />
+    <Compile Include="Api\Models\TopGoalScorer.cs" />
+    <Compile Include="Api\SuperSport.cs" />
+    <Compile Include="Api\WebDog.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LogView.cs" />
+    <Compile Include="Competitions.xaml.cs">
+      <DependentUpon>Competitions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherPages\FullLog.xaml.cs">
+      <DependentUpon>FullLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherPages\Live.xaml.cs">
+      <DependentUpon>Live.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherPages\Results.xaml.cs">
+      <DependentUpon>Results.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherPages\Scorers.xaml.cs">
+      <DependentUpon>Scorers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OtherPages\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingsManager.cs" />
+    <Compile Include="ViewType.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Competitions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="OtherPages\FullLog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OtherPages\Live.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OtherPages\Results.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OtherPages\Scorers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OtherPages\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Images\Styling\Background.png" />
+    <Resource Include="Images\Styling\Panel.png" />
+    <Resource Include="Images\Styling\RawBackground.png" />
+    <Content Include="Images\TeamLogo\1. FC Köln.png" />
+    <Content Include="Images\TeamLogo\1. FSV Mainz 05.png" />
+    <Content Include="Images\TeamLogo\Ajax Cape Town.png" />
+    <Content Include="Images\TeamLogo\Ajax.png" />
+    <Content Include="Images\TeamLogo\Almería.png" />
+    <Content Include="Images\TeamLogo\AmaZulu.png" />
+    <Content Include="Images\TeamLogo\APOEL Nicosia.png" />
+    <Content Include="Images\TeamLogo\Arsenal.png" />
+    <Content Include="Images\TeamLogo\Aston Villa.png" />
+    <Content Include="Images\TeamLogo\Atalanta.png" />
+    <Content Include="Images\TeamLogo\Athletic Club.png" />
+    <Content Include="Images\TeamLogo\Atlético de Madrid.png" />
+    <Content Include="Images\TeamLogo\Barcelona.png" />
+    <Content Include="Images\TeamLogo\Bastia.png" />
+    <Content Include="Images\TeamLogo\BATE Borisov.png" />
+    <Content Include="Images\TeamLogo\Bayer 04 Leverkusen.png" />
+    <Content Include="Images\TeamLogo\Benfica.png" />
+    <Content Include="Images\TeamLogo\Bidvest Wits.png" />
+    <Content Include="Images\TeamLogo\Black Aces.png" />
+    <Content Include="Images\TeamLogo\Bloem Celtic.png" />
+    <Content Include="Images\TeamLogo\Bordeaux.png" />
+    <Content Include="Images\TeamLogo\Borussia Dortmund.png" />
+    <Content Include="Images\TeamLogo\Borussia Mönchengladbach.png" />
+    <Content Include="Images\TeamLogo\Burnley.png" />
+    <Content Include="Images\TeamLogo\Caen.png" />
+    <Content Include="Images\TeamLogo\Cagliari.png" />
+    <Content Include="Images\TeamLogo\Catania.png" />
+    <Content Include="Images\TeamLogo\Celta de Vigo.png" />
+    <Content Include="Images\TeamLogo\Cesena.png" />
+    <Content Include="Images\TeamLogo\Chelsea.png" />
+    <Content Include="Images\TeamLogo\Chievo.png" />
+    <Content Include="Images\TeamLogo\Chippa United.png" />
+    <Content Include="Images\TeamLogo\Crystal Palace.png" />
+    <Content Include="Images\TeamLogo\CSKA Moscow.png" />
+    <Content Include="Images\TeamLogo\Córdoba.png" />
+    <Content Include="Images\TeamLogo\Deportivo de La Coruña.png" />
+    <Content Include="Images\TeamLogo\Eibar.png" />
+    <Content Include="Images\TeamLogo\Eintracht Frankfurt.png" />
+    <Content Include="Images\TeamLogo\Elche.png" />
+    <Content Include="Images\TeamLogo\Empoli.png" />
+    <Content Include="Images\TeamLogo\Espanyol.png" />
+    <Content Include="Images\TeamLogo\Everton.png" />
+    <Content Include="Images\TeamLogo\Evian Thonon Gaillard.png" />
+    <Content Include="Images\TeamLogo\FC Augsburg.png" />
+    <Content Include="Images\TeamLogo\FC Basel.png" />
+    <Content Include="Images\TeamLogo\FC Bayern München.png" />
+    <Content Include="Images\TeamLogo\FC Kaiserslautern.png" />
+    <Content Include="Images\TeamLogo\FC Schalke 04.png" />
+    <Content Include="Images\TeamLogo\Fiorentina.png" />
+    <Content Include="Images\TeamLogo\Free State Stars.png" />
+    <Content Include="Images\TeamLogo\Galatasaray.png" />
+    <Content Include="Images\TeamLogo\Genoa.png" />
+    <Content Include="Images\TeamLogo\Getafe.png" />
+    <Content Include="Images\TeamLogo\Granada CF.png" />
+    <Content Include="Images\TeamLogo\Guingamp.png" />
+    <Content Include="Images\TeamLogo\Hamburger SV.png" />
+    <Content Include="Images\TeamLogo\Hannover 96.png" />
+    <Content Include="Images\TeamLogo\Hertha BSC.png" />
+    <Content Include="Images\TeamLogo\Hull City.png" />
+    <Content Include="Images\TeamLogo\Internazionale.png" />
+    <Content Include="Images\TeamLogo\Juventus.png" />
+    <Content Include="Images\TeamLogo\Kaizer Chiefs.png" />
+    <Content Include="Images\TeamLogo\Lazio.png" />
+    <Content Include="Images\TeamLogo\Leicester City.png" />
+    <Content Include="Images\TeamLogo\Lens.png" />
+    <Content Include="Images\TeamLogo\Levante.png" />
+    <Content Include="Images\TeamLogo\Lille.png" />
+    <Content Include="Images\TeamLogo\Liverpool.png" />
+    <Content Include="Images\TeamLogo\Lorient.png" />
+    <Content Include="Images\TeamLogo\Ludogorets Razgrad.png" />
+    <Content Include="Images\TeamLogo\Lyon.png" />
+    <Content Include="Images\TeamLogo\Malmö FF.png" />
+    <Content Include="Images\TeamLogo\Mamelodi Sundowns.png" />
+    <Content Include="Images\TeamLogo\Manchester City.png" />
+    <Content Include="Images\TeamLogo\Manchester United.png" />
+    <Content Include="Images\TeamLogo\Maritzburg Utd.png" />
+    <Content Include="Images\TeamLogo\Marseille.png" />
+    <Content Include="Images\TeamLogo\Metz.png" />
+    <Content Include="Images\TeamLogo\Milan.png" />
+    <Content Include="Images\TeamLogo\Monaco.png" />
+    <Content Include="Images\TeamLogo\Montpellier.png" />
+    <Content Include="Images\TeamLogo\Moroka Swallows.png" />
+    <Content Include="Images\TeamLogo\Málaga.png" />
+    <Content Include="Images\TeamLogo\Nantes.png" />
+    <Content Include="Images\TeamLogo\Napoli.png" />
+    <Content Include="Images\TeamLogo\Newcastle United.png" />
+    <Content Include="Images\TeamLogo\Nice.png" />
+    <Content Include="Images\TeamLogo\NK Maribor.png" />
+    <Content Include="Images\TeamLogo\Orlando Pirates.png" />
+    <Content Include="Images\TeamLogo\Palermo.png" />
+    <Content Include="Images\TeamLogo\Paris Saint Germain.png" />
+    <Content Include="Images\TeamLogo\Parma.png" />
+    <Content Include="Images\TeamLogo\Platinum Stars.png" />
+    <Content Include="Images\TeamLogo\Polokwane City.png" />
+    <Content Include="Images\TeamLogo\Queens Park Rangers.png" />
+    <Content Include="Images\TeamLogo\Rayo Vallecano.png" />
+    <Content Include="Images\TeamLogo\Real Madrid.png" />
+    <Content Include="Images\TeamLogo\Real Sociedad.png" />
+    <Content Include="Images\TeamLogo\Reims.png" />
+    <Content Include="Images\TeamLogo\Rennes.png" />
+    <Content Include="Images\TeamLogo\Roma.png" />
+    <Content Include="Images\TeamLogo\RSC Anderlecht.png" />
+    <Content Include="Images\TeamLogo\Sampdoria.png" />
+    <Content Include="Images\TeamLogo\Sassuolo.png" />
+    <Content Include="Images\TeamLogo\SC Paderborn 07.png" />
+    <Content Include="Images\TeamLogo\Sevilla.png" />
+    <Content Include="Images\TeamLogo\Shakhtar Donetsk.png" />
+    <Content Include="Images\TeamLogo\Southampton.png" />
+    <Content Include="Images\TeamLogo\Sport-Club Freiburg.png" />
+    <Content Include="Images\TeamLogo\Sporting Lisbon.png" />
+    <Content Include="Images\TeamLogo\St Etienne.png" />
+    <Content Include="Images\TeamLogo\Stoke City.png" />
+    <Content Include="Images\TeamLogo\Sunderland.png" />
+    <Content Include="Images\TeamLogo\SuperSport United.png" />
+    <Content Include="Images\TeamLogo\SV Werder Bremen.png" />
+    <Content Include="Images\TeamLogo\Swansea City.png" />
+    <Content Include="Images\TeamLogo\Torino.png" />
+    <Content Include="Images\TeamLogo\Tottenham Hotspur.png" />
+    <Content Include="Images\TeamLogo\Toulouse.png" />
+    <Content Include="Images\TeamLogo\TSG 1899 Hoffenheim.png" />
+    <Content Include="Images\TeamLogo\Udinese.png" />
+    <Content Include="Images\TeamLogo\University of Pretoria.png" />
+    <Content Include="Images\TeamLogo\Valencia CF.png" />
+    <Content Include="Images\TeamLogo\Verona.png" />
+    <Content Include="Images\TeamLogo\VfB Stuttgart.png" />
+    <Content Include="Images\TeamLogo\VfL Wolfsburg.png" />
+    <Content Include="Images\TeamLogo\Villarreal.png" />
+    <Content Include="Images\TeamLogo\West Bromwich Albion.png" />
+    <Content Include="Images\TeamLogo\West Ham United.png" />
+    <Content Include="Images\TeamLogo\Zenit St Petersburg.PNG" />
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>

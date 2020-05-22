@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Soccer_442</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string-array name="navigation_drawer_items_array">
+        <item>EPL</item>
+        <item>La Liga</item>
+        <item>Serie A</item>
+        <item>League 1</item>
+    </string-array>
+    <string name="comp_prompt">Choose a competition</string>
+    <string name="favourate_prompt">Choose your favourite</string>
+    <string name="load_prompt">Load favourite(app start)</string>
+    <string name="update_prompt">When to update</string>
+    <string-array name="comp_arrays">
+        <item>BPL</item>
+        <item>FA</item>
+        <item>LaLiga</item>
+        <item>BundesLiga</item>
+        <item>Absa</item>
+        <item>League1</item>
+        <item>SerieA</item>
+        <item>UEFA</item>
+        <item>Copa</item>
+    </string-array>
+
+    <string-array name="yes_no">
+        <item>Yes</item>
+        <item>No</item>
+    </string-array>
+
+    <string-array name="update_options">
+        <item>Always</item>
+        <item>Daily</item>
+        <item>Never</item>
+    </string-array>
+
+</resources>

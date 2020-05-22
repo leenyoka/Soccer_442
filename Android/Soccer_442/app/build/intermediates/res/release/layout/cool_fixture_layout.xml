@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:padding="10dp">
+
+
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:layout_height="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/panel">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:textColor="#FBF5EF"
+                android:textAlignment="center"
+                android:id="@+id/title"
+                android:text="Fixtures"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:layout_height="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/panel">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/date"
+                android:textColor="#FBF5EF"
+                android:layout_gravity="right"
+                android:textAlignment="center"
+                android:text="01-03-2015"/>
+
+        </LinearLayout>
+        <ImageView
+            android:orientation="vertical"
+            android:layout_marginLeft="-340dp"
+            android:layout_marginTop="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/homeTeamImage"
+            >
+        </ImageView>
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:padding="10dp">
+
+
+
+        <LinearLayout
+            android:layout_width="70dp"
+            android:orientation="vertical"
+            android:layout_gravity="top"
+            android:layout_height="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="290dp"
+            android:orientation="horizontal"
+            android:layout_gravity="top"
+            android:layout_height="40dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            >
+
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:textSize="40dp"
+            android:padding="8dp"
+            android:gravity="center"
+            android:layout_marginLeft="-355dp"
+            android:layout_marginTop="45dp"
+            android:layout_width="95dp"
+            android:layout_height="100dp"
+            android:id="@+id/homeTeamName"
+            android:background="@drawable/team_name_back"
+            android:textColor="#FBF5EF"
+            android:text=""
+            >
+        </TextView>
+        <TextView
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_marginTop="47dp"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:text="VS"
+            android:textColor="#FBF5EF"
+            android:id="@+id/score"
+            android:textSize="50dp"
+            android:textAlignment="center">
+        </TextView>
+
+        <TextView
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="10dp"
+            android:text=""
+            android:gravity="center"
+            android:textColor="#FBF5EF"
+            android:textSize="40dp"
+            android:background="@drawable/team_name_back"
+            android:layout_width="95dp"
+            android:layout_height="100dp"
+            android:id="@+id/awayTeamName"
+            >
+        </TextView>
+
+    </LinearLayout>
+
+
+</RelativeLayout><!-- From: file:/C:/Development/Android/Soccer_442/app/src/main/res/layout/cool_fixture_layout.xml -->
