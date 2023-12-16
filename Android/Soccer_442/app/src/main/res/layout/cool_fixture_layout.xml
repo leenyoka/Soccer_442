@@ -103,7 +103,6 @@
             android:layout_width="95dp"
             android:layout_height="100dp"
             android:id="@+id/homeTeamName"
-            android:background="@drawable/team_name_back"
             android:textColor="#FBF5EF"
             android:text=""
             >
@@ -128,7 +127,7 @@
             android:gravity="center"
             android:textColor="#FBF5EF"
             android:textSize="40dp"
-            android:background="@drawable/team_name_back"
+
             android:layout_width="95dp"
             android:layout_height="100dp"
             android:id="@+id/awayTeamName"

@@ -1,5 +1,0 @@
-C:\Development\Android\Soccer_442\app\build\intermediates\classes\release
-C:\Development\Android\Soccer_442\app\build\intermediates\pre-dexed\release\support-annotations-21.0.3-f892dd0fe676dea0d92466d4e685994bf334585f.jar
-C:\Development\Android\Soccer_442\app\build\intermediates\pre-dexed\release\internal_impl-21.0.3-a3edcba1b56b56206c8d7ed307e35046d08fe946.jar
-C:\Development\Android\Soccer_442\app\build\intermediates\pre-dexed\release\classes-775a54a1a5eee39ceb62b5db77d66a1eb4e57f42.jar
-C:\Development\Android\Soccer_442\app\build\intermediates\pre-dexed\release\classes-b955ad09f252e0cd4528e0d913777e661f954107.jar

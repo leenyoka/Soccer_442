@@ -15,15 +15,18 @@
     <string name="load_prompt">Load favourite(app start)</string>
     <string name="update_prompt">When to update</string>
     <string-array name="comp_arrays">
-        <item>BPL</item>
-        <item>FA</item>
-        <item>LaLiga</item>
-        <item>BundesLiga</item>
-        <item>Absa</item>
-        <item>League1</item>
-        <item>SerieA</item>
-        <item>UEFA</item>
-        <item>Copa</item>
+        <item>Championship</item>
+        <item>Premier League</item>
+        <item>UEFA Champions League</item>
+        <item>European Championship</item>
+        <item>Ligue 1</item>
+        <item>Bundesliga</item>
+        <item>Serie A</item>
+        <item>Eredivisie</item>
+        <item>Primeira Liga</item>
+        <item>Copa Libertadores</item>
+        <item>Primera Division</item>
+        <item>FIFA World Cup</item>
     </string-array>
 
     <string-array name="yes_no">
