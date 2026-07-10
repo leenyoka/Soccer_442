@@ -8,37 +8,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nyoka.soccer_442.football_data.FootballData;
 import com.nyoka.soccer_442.football_data.FootballMatch;
 import com.nyoka.soccer_442.football_data.HomeOrAway;
-import com.nyoka.soccer_442.football_data.MatchResponse;
 import com.nyoka.soccer_442.football_data.Statistics;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by linda.nyoka on 2015-03-23.
  */
 public class activity_past_commentry extends AppCompatActivity {
 
-        CommentryListAdapter commentaryListAdapter;
-        ListView commentaryListView;
         Context context;
         String matchId;
         //Result liveGame;
         String competition;
         Utility utility = new Utility();
         ProgressDialog dialog;
+        boolean headToHeadEmpty = true;
+        boolean commentaryEmpty = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_live_commentry);
+        Utility.ApplyEdgeToEdgeInsets(this);
         getSupportActionBar().hide();
         context = this;
         SetMatchId();
@@ -87,68 +82,70 @@ public class activity_past_commentry extends AppCompatActivity {
                     //statsHolder = superSport.GetStats(liveGame.matchId);
                     //lineupsHolder = new SuperSport().GetLineUp(liveGame.matchId);
 
+                    if (holder == null) {
+                        android.util.Log.w("activity_past_commentry", "GetMatchDetails returned null for matchId=" + matchId + " competition=" + competition);
+                        utility.showDialog("Error retrieving data. Please try again later", false, "Error", getSupportFragmentManager());
+                        return;
+                    }
 
-                    //comments = holder;
-                    //stats = statsHolder;
-                    //lineups = lineupsHolder;
-
-                    FootballMatch finalHolder = holder;
-                    ArrayList<Comment> comments = holder.GetComments();
+                    final FootballMatch finalHolder = holder;
+                    final HeadToHeadSummary h2h = superSport.GetHeadToHeadAndForm(competition, matchId, holder.homeTeam.name, holder.awayTeam.name, holder.utcDate);
+                    final java.util.ArrayList<Comment> commentary = superSport.GetCommentary(competition, matchId);
+                    // Still on the background thread - fans out ~20-30 Wikipedia lookups
+                    // across a small pool rather than blocking the UI thread on them.
+                    LineupPhotoEnricher.enrich(holder.homeTeam, holder.awayTeam);
 
                     runOnUiThread(new Runnable() {
                             public void run() {
-                                if (comments != null) {
-                                    commentaryListView = (ListView) findViewById(R.id.liveGameCommentary);
-                                    commentaryListAdapter = new CommentryListAdapter(context, comments);
-                                    commentaryListView.setAdapter(commentaryListAdapter);
-                                    TextView empty = (TextView) findViewById(R.id.comm_empty);
-                                    commentaryListView.setEmptyView(empty);
+                                // comm_homeTeamImage/comm_awayTeamImage were TextView slots with no
+                                // actual crest ImageView anywhere on this screen - GetMeAnImage(TextView,..)
+                                // is a deliberate no-op now (see its comment), so nothing ever rendered here.
+                                com.bumptech.glide.Glide.with(context).load(finalHolder.homeTeam.crest).into((android.widget.ImageView) findViewById(R.id.comm_homeTeamImage));
+                                com.bumptech.glide.Glide.with(context).load(finalHolder.awayTeam.crest).into((android.widget.ImageView) findViewById(R.id.comm_awayTeamImage));
+                                ((TextView) findViewById(R.id.comm_homeTeamName)).setText(finalHolder.homeTeam.name);
+                                ((TextView) findViewById(R.id.comm_awayTeamName)).setText(finalHolder.awayTeam.name);
 
-                                    utility.GetMeAnImage((TextView) findViewById(R.id.comm_homeTeamImage), finalHolder.homeTeam.name);
-                                    utility.GetMeAnImage((TextView) findViewById(R.id.comm_awayTeamImage), finalHolder.awayTeam.name);
+                                TextView score = (TextView) findViewById(R.id.comm_matchScore);
+                                score.setText(utility.FormatScore(finalHolder.score));
+                                // This TextView is 40sp, sized for a plain "1 - 1" between the two
+                                // crests - a penalty-shootout suffix ("1 - 1 (4-2 pens)") is much
+                                // longer and would overflow into the crest columns at that size.
+                                boolean hasPenalties = finalHolder.score.penaltyHome != null;
+                                score.setTextSize(hasPenalties ? 18 : 40);
+                                TextView title = (TextView) findViewById(R.id.matchStatus);
+                                title.setText("Result");
 
-                                    TextView score = (TextView) findViewById(R.id.comm_matchScore);
-                                    score.setText(String.valueOf(finalHolder.score.fullTime.home) + " - "
-                                            + String.valueOf(finalHolder.score.fullTime.away));
-                                    TextView title = (TextView) findViewById(R.id.matchStatus);
-                                    title.setText("Result");
-
-                                    if (finalHolder.score.fullTime.home != 0) {
-                                        TextView scorersHome = (TextView) findViewById(R.id.homeTeamScorers);
-                                        scorersHome.setText("");
-                                        for (String scorer : finalHolder.GetScorers(HomeOrAway.Home))
-                                            if(scorer != null) {
-                                                scorersHome.setText(scorersHome.getText() + scorer);
-                                                scorersHome.setText(utility.Trim(",", scorersHome.getText().toString()));
-                                            }
-                                    }
-
-                                    if (finalHolder.score.fullTime.away != 0) {
-                                        TextView scorersAway = (TextView) findViewById(R.id.awayTeamScorers);
-                                        scorersAway.setText("");
-                                        for (String scorer : finalHolder.GetScorers(HomeOrAway.Away))
-                                            if(scorer != null) {
-                                                scorersAway.setText(scorersAway.getText() + scorer);
-                                                scorersAway.setText(utility.Trim(",", scorersAway.getText().toString()));
-                                            }
-                                    }
-
-                                    RelativeLayout scorers = (RelativeLayout) findViewById(R.id.showdescriptioncontenttitle);
-
-
-                                    //if (comments.AwayTeamScore == 0 && comments.HomeTeamScore == 0)
-                                    //scorers.setVisibility(View.GONE);
-                                    //else if (comments.AwayTeamScore <= 2 && comments.HomeTeamScore <= 2) {
-                                    //scorers.getLayoutParams().height = 50;
-                                    //} else
-                                    //scorers.getLayoutParams().height = 100;
+                                if (finalHolder.score.fullTime.home != 0) {
+                                    TextView scorersHome = (TextView) findViewById(R.id.homeTeamScorers);
+                                    scorersHome.setText("");
+                                    for (String scorer : finalHolder.GetScorers(HomeOrAway.Home))
+                                        if(scorer != null) {
+                                            scorersHome.setText(scorersHome.getText() + scorer);
+                                            scorersHome.setText(utility.Trim(",", scorersHome.getText().toString()));
+                                        }
                                 }
 
-                                if (finalHolder != null) {
-                                    SetStats(finalHolder.homeTeam.statistics, finalHolder.awayTeam.statistics);
+                                if (finalHolder.score.fullTime.away != 0) {
+                                    TextView scorersAway = (TextView) findViewById(R.id.awayTeamScorers);
+                                    scorersAway.setText("");
+                                    for (String scorer : finalHolder.GetScorers(HomeOrAway.Away))
+                                        if(scorer != null) {
+                                            scorersAway.setText(scorersAway.getText() + scorer);
+                                            scorersAway.setText(utility.Trim(",", scorersAway.getText().toString()));
+                                        }
                                 }
+
+                                headToHeadEmpty = HeadToHeadRenderer.isEmpty(h2h);
+                                HeadToHeadRenderer.render(context, (LinearLayout) findViewById(R.id.headToHeadContainer), h2h, finalHolder.homeTeam.name, finalHolder.awayTeam.name);
+
+                                commentaryEmpty = commentary.isEmpty();
+                                ((android.widget.ListView) findViewById(R.id.commentaryListView)).setAdapter(new CommentryListAdapter(context, commentary));
+
+                                HeadToHead(null);
+
+                                SetStats(finalHolder.homeTeam.statistics, finalHolder.awayTeam.statistics);
                                 SetLineUp(finalHolder);
-                                //dialog.hide();
+                                Utility.HideLoading(activity_past_commentry.this);
                             }
 
                         });
@@ -157,94 +154,111 @@ public class activity_past_commentry extends AppCompatActivity {
                 }
                 catch (Exception ex)
                     {
-
+                        android.util.Log.w("activity_past_commentry", "Failed to load match " + matchId, ex);
                         utility.showDialog("Error retrieving data. Please try again later", false, "Error", getSupportFragmentManager());
                         return;
                     }
                 }
 
         });
+        Utility.ShowLoading(this);
         eThread.start();
     }
     public void Commentary(View view)
     {
-        ((ListView)findViewById(R.id.liveGameCommentary)).setVisibility(View.VISIBLE);
+        ((android.widget.ListView)findViewById(R.id.commentaryListView)).setVisibility(View.VISIBLE);
+        ((android.widget.ScrollView)findViewById(R.id.headToHeadScroll)).setVisibility(View.GONE);
         ((LinearLayout)findViewById(R.id.LineUpView)).setVisibility(View.GONE);
         ((LinearLayout)findViewById(R.id.statsView)).setVisibility(View.GONE);
-
+        findViewById(R.id.comm_empty).setVisibility(commentaryEmpty ? View.VISIBLE : View.GONE);
 
         ((Button)findViewById(R.id.btnCommentary)).setBackgroundResource(R.drawable.green_button_selected);
+        ((Button)findViewById(R.id.btnHeadToHead)).setBackgroundResource(R.drawable.green_button);
+        ((Button)findViewById(R.id.btnStats)).setBackgroundResource(R.drawable.green_button);
+        ((Button)findViewById(R.id.button1)).setBackgroundResource(R.drawable.green_button);
+    }
+    public void HeadToHead(View view)
+    {
+        ((android.widget.ListView)findViewById(R.id.commentaryListView)).setVisibility(View.GONE);
+        ((android.widget.ScrollView)findViewById(R.id.headToHeadScroll)).setVisibility(View.VISIBLE);
+        ((LinearLayout)findViewById(R.id.LineUpView)).setVisibility(View.GONE);
+        ((LinearLayout)findViewById(R.id.statsView)).setVisibility(View.GONE);
+        // comm_empty is a match_parent-height TextView shared by every tab's empty state,
+        // so it has to be explicitly restored here or it stays GONE forever once Stats()/
+        // LineUp() below turn it off.
+        findViewById(R.id.comm_empty).setVisibility(headToHeadEmpty ? View.VISIBLE : View.GONE);
+
+        ((Button)findViewById(R.id.btnCommentary)).setBackgroundResource(R.drawable.green_button);
+        ((Button)findViewById(R.id.btnHeadToHead)).setBackgroundResource(R.drawable.green_button_selected);
         ((Button)findViewById(R.id.btnStats)).setBackgroundResource(R.drawable.green_button);
         ((Button)findViewById(R.id.button1)).setBackgroundResource(R.drawable.green_button);
     }
     public void Stats(View view)
     {
-        ((ListView)findViewById(R.id.liveGameCommentary)).setVisibility(View.GONE);
+        ((android.widget.ListView)findViewById(R.id.commentaryListView)).setVisibility(View.GONE);
+        ((android.widget.ScrollView)findViewById(R.id.headToHeadScroll)).setVisibility(View.GONE);
         ((LinearLayout)findViewById(R.id.LineUpView)).setVisibility(View.GONE);
         ((LinearLayout)findViewById(R.id.statsView)).setVisibility(View.VISIBLE);
+        // comm_empty is match_parent height - left visible (from another tab having no data)
+        // it swallows all remaining vertical space and hides statsView entirely even though
+        // statsView itself is correctly set to VISIBLE above.
+        findViewById(R.id.comm_empty).setVisibility(View.GONE);
 
         ((Button)findViewById(R.id.btnCommentary)).setBackgroundResource(R.drawable.green_button);
+        ((Button)findViewById(R.id.btnHeadToHead)).setBackgroundResource(R.drawable.green_button);
         ((Button)findViewById(R.id.btnStats)).setBackgroundResource(R.drawable.green_button_selected);
         ((Button)findViewById(R.id.button1)).setBackgroundResource(R.drawable.green_button);
     }
     public void LineUp(View view)
     {
-        ((ListView)findViewById(R.id.liveGameCommentary)).setVisibility(View.GONE);
+        ((android.widget.ListView)findViewById(R.id.commentaryListView)).setVisibility(View.GONE);
+        ((android.widget.ScrollView)findViewById(R.id.headToHeadScroll)).setVisibility(View.GONE);
         ((LinearLayout)findViewById(R.id.LineUpView)).setVisibility(View.VISIBLE);
         ((LinearLayout)findViewById(R.id.statsView)).setVisibility(View.GONE);
+        // Same reason as Stats() above - comm_empty must be explicitly cleared or it blocks
+        // LineUpView from having any visible space.
+        findViewById(R.id.comm_empty).setVisibility(View.GONE);
         ((Button)findViewById(R.id.btnCommentary)).setBackgroundResource(R.drawable.green_button);
+        ((Button)findViewById(R.id.btnHeadToHead)).setBackgroundResource(R.drawable.green_button);
         ((Button)findViewById(R.id.btnStats)).setBackgroundResource(R.drawable.green_button);
         ((Button)findViewById(R.id.button1)).setBackgroundResource(R.drawable.green_button_selected);
     }
     private void SetStats(Statistics home, Statistics away)
     {
         if(home != null && away != null) {
-            ((TextView) findViewById(R.id.shotsHome)).setText(home.shots);
-            ((TextView) findViewById(R.id.shotsAway)).setText(away.shots);
+            // setText(int) resolves to the "look up a string resource by this ID" overload,
+            // not "render this number" - these are int fields, so they must go through
+            // String.valueOf() first or Android throws Resources.NotFoundException.
+            ((TextView) findViewById(R.id.shotsHome)).setText(String.valueOf(home.shots));
+            ((TextView) findViewById(R.id.shotsAway)).setText(String.valueOf(away.shots));
 
-            ((TextView) findViewById(R.id.foulsHome)).setText(home.fouls);
-            ((TextView) findViewById(R.id.foulsAway)).setText(away.fouls);
+            ((TextView) findViewById(R.id.foulsHome)).setText(String.valueOf(home.fouls));
+            ((TextView) findViewById(R.id.foulsAway)).setText(String.valueOf(away.fouls));
 
-            ((TextView) findViewById(R.id.cornersHome)).setText(home.corner_kicks);
-            ((TextView) findViewById(R.id.cornersAway)).setText(away.corner_kicks);
+            ((TextView) findViewById(R.id.cornersHome)).setText(String.valueOf(home.corner_kicks));
+            ((TextView) findViewById(R.id.cornersAway)).setText(String.valueOf(away.corner_kicks));
 
-            ((TextView) findViewById(R.id.offsidesHome)).setText(home.offsides);
-            ((TextView) findViewById(R.id.offsidesAway)).setText(away.offsides);
+            ((TextView) findViewById(R.id.offsidesHome)).setText(String.valueOf(home.offsides));
+            ((TextView) findViewById(R.id.offsidesAway)).setText(String.valueOf(away.offsides));
 
-            ((TextView) findViewById(R.id.yellowHome)).setText(home.yellow_cards);
-            ((TextView) findViewById(R.id.yellowAway)).setText(away.yellow_cards);
+            ((TextView) findViewById(R.id.yellowHome)).setText(String.valueOf(home.yellow_cards));
+            ((TextView) findViewById(R.id.yellowAway)).setText(String.valueOf(away.yellow_cards));
 
-            ((TextView) findViewById(R.id.redHome)).setText(home.red_cards);
-            ((TextView) findViewById(R.id.redAway)).setText(away.red_cards);
+            ((TextView) findViewById(R.id.redHome)).setText(String.valueOf(home.red_cards));
+            ((TextView) findViewById(R.id.redAway)).setText(String.valueOf(away.red_cards));
         }
     }
     private void SetLineUp(FootballMatch lineUp) {
-        if (lineUp.homeTeam.lineup != null) {
-            ((TextView) findViewById(R.id.player1Home)).setText(lineUp.homeTeam.lineup.get(0).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(0).name);
-            ((TextView) findViewById(R.id.player2Home)).setText(lineUp.homeTeam.lineup.get(1).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(1).name);
-            ((TextView) findViewById(R.id.player3Home)).setText(lineUp.homeTeam.lineup.get(2).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(2).name);
-            ((TextView) findViewById(R.id.player4Home)).setText(lineUp.homeTeam.lineup.get(3).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(3).name);
-            ((TextView) findViewById(R.id.player5Home)).setText(lineUp.homeTeam.lineup.get(4).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(4).name);
-            ((TextView) findViewById(R.id.player6Home)).setText(lineUp.homeTeam.lineup.get(5).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(5).name);
-            ((TextView) findViewById(R.id.player7Home)).setText(lineUp.homeTeam.lineup.get(6).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(6).name);
-            ((TextView) findViewById(R.id.player8Home)).setText(lineUp.homeTeam.lineup.get(7).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(7).name);
-            ((TextView) findViewById(R.id.player9Home)).setText(lineUp.homeTeam.lineup.get(8).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(8).name);
-            ((TextView) findViewById(R.id.player10Home)).setText(lineUp.homeTeam.lineup.get(9).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(9).name);
-            ((TextView) findViewById(R.id.player11Home)).setText(lineUp.homeTeam.lineup.get(10).position.toUpperCase() + " " + lineUp.homeTeam.lineup.get(10).name);
-        }
-        if ( lineUp.awayTeam.lineup != null) {
-            ((TextView) findViewById(R.id.player1Away)).setText(lineUp.awayTeam.lineup.get(0).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(0).position);
-            ((TextView) findViewById(R.id.player2Away)).setText(lineUp.awayTeam.lineup.get(1).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(1).position);
-            ((TextView) findViewById(R.id.player3Away)).setText(lineUp.awayTeam.lineup.get(2).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(2).position);
-            ((TextView) findViewById(R.id.player4Away)).setText(lineUp.awayTeam.lineup.get(3).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(3).position);
-            ((TextView) findViewById(R.id.player5Away)).setText(lineUp.awayTeam.lineup.get(4).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(4).position);
-            ((TextView) findViewById(R.id.player6Away)).setText(lineUp.awayTeam.lineup.get(5).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(5).position);
-            ((TextView) findViewById(R.id.player7Away)).setText(lineUp.awayTeam.lineup.get(6).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(6).position);
-            ((TextView) findViewById(R.id.player8Away)).setText(lineUp.awayTeam.lineup.get(7).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(7).position);
-            ((TextView) findViewById(R.id.player9Away)).setText(lineUp.awayTeam.lineup.get(8).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(8).position);
-            ((TextView) findViewById(R.id.player10Away)).setText(lineUp.awayTeam.lineup.get(9).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(9).position);
-            ((TextView) findViewById(R.id.player11Away)).setText(lineUp.awayTeam.lineup.get(10).name.toUpperCase() + " " + lineUp.awayTeam.lineup.get(10).position);
-        }
+        LinearLayout pitchRows = (LinearLayout) findViewById(R.id.pitchRows);
+        LinearLayout substitutesContainer = (LinearLayout) findViewById(R.id.substitutesContainer);
+        LineupRenderer.render(context, pitchRows, substitutesContainer, lineUp.homeTeam, lineUp.awayTeam, new LineupRenderer.OnPlayerClick() {
+            @Override
+            public void onClick(String playerName) {
+                Intent intent = new Intent(activity_past_commentry.this, player_profile_activity.class);
+                intent.putExtra("playerName", playerName);
+                startActivity(intent);
+            }
+        });
     }
 
 }

@@ -13,6 +13,9 @@ public class TableItem {
     public int goalsAgainst;
     public int goalDifference;
 
+    public TableItem() {
+    }
+
     public TableItem(String value) {
         String[] values = value.split("_");
 

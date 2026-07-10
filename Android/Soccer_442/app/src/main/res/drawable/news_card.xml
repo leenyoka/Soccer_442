@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    A flat-color stand-in for @drawable/panel, used specifically for the news list's
+    wrap_content rows. panel.png only ships an mdpi asset (670x308px); on higher-density
+    devices Android upscales it, and its resulting intrinsic height becomes this View's
+    getSuggestedMinimumHeight() - forcing every wrap_content row using it as a background
+    to be at least that tall regardless of actual content. A shape drawable has no
+    intrinsic size, so it doesn't fight wrap_content the way the PNG does.
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#52225B66" />
+    <corners android:radius="4dp" />
+</shape>

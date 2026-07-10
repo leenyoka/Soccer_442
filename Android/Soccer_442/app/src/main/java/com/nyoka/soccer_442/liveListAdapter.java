@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.nyoka.soccer_442.football_data.FootballMatch;
 
 import java.lang.reflect.Array;
@@ -37,12 +38,14 @@ public class liveListAdapter  extends BaseAdapter {
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
+        FootballMatch result = liveList.get(position);
+
         if (rowView == null) {
             rowView = inflater.inflate(R.layout.template_game, parent, false);
             RowDataViewHolder viewHolder = new RowDataViewHolder();
-            //viewHolder.awayTeamImage = (ImageView) rowView.findViewById(R.id.awayTeamImage);
+            viewHolder.awayTeamImage = (ImageView) rowView.findViewById(R.id.awayTeamImage);
             viewHolder.score = (TextView) rowView.findViewById(R.id.score);
-            //viewHolder.homeTeamImage = (ImageView) rowView.findViewById(R.id.homeTeamImage);
+            viewHolder.homeTeamImage = (ImageView) rowView.findViewById(R.id.homeTeamImage);
             viewHolder.date = (TextView) rowView.findViewById(R.id.date);
             viewHolder.title = (TextView) rowView.findViewById(R.id.title);
             viewHolder.homeTeamName = (TextView) rowView.findViewById(R.id.homeTeamName);
@@ -51,11 +54,13 @@ public class liveListAdapter  extends BaseAdapter {
         }
 
         RowDataViewHolder holder = (RowDataViewHolder) rowView.getTag();
-        FootballMatch result = liveList.get(position);
 
-        utility.GetMeAnImage(holder.homeTeamName, result.homeTeam.name);
+        // (Re)loaded on every bind, not just when the row view is first created - ListView
+        // recycles row views, and a recycled view otherwise keeps showing whatever crest/badge
+        // an earlier, unrelated row happened to load into it.
+        utility.ShowTeamBadge(contextView, result.homeTeam, holder.homeTeamImage, holder.homeTeamName);
         holder.score.setText(result.score.halfTime.home + " - " + result.score.halfTime.away);
-        utility.GetMeAnImage(holder.awayTeamName, result.awayTeam.name);
+        utility.ShowTeamBadge(contextView, result.awayTeam, holder.awayTeamImage, holder.awayTeamName);
         holder.title.setText(_txt);//result.MatchStatus);
         holder.date.setText(result.stage);//show latest time, from last comment
         return rowView;

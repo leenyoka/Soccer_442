@@ -25,29 +25,31 @@ public class FootballMatch {
     public int id;
     public String utcDate;
 
-    public LocalDateTime GetDate(){
-        String dateString = "2023-08-12T12:00:00Z";
+    // ESPN's "date" field shows up in a couple of variants - with seconds
+    // ("2026-08-21T19:00:00Z"), without ("2026-08-21T19:00Z"), and occasionally date-only
+    // ("2026-08-21"). Tries each in turn rather than assuming one fixed shape.
+    private static final String[] DATE_PATTERNS = {
+            "yyyy-MM-dd'T'HH:mm:ssX",
+            "yyyy-MM-dd'T'HH:mmX",
+    };
 
-        // Define the date format
-        DateTimeFormatter formatter = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssX");
+    public LocalDateTime GetDate(){
+        if (utcDate == null || android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.O) {
+            return null;
         }
 
-        try {
-            // Parse the date string into a LocalDateTime object
-            LocalDateTime parsedDateTime = null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                parsedDateTime = LocalDateTime.parse(dateString, formatter);
+        for (String pattern : DATE_PATTERNS) {
+            try {
+                return LocalDateTime.parse(utcDate, DateTimeFormatter.ofPattern(pattern));
+            } catch (Exception ignored) {
             }
-            return parsedDateTime;
-
+        }
+        try {
+            return java.time.LocalDate.parse(utcDate, DateTimeFormatter.ofPattern("yyyy-MM-dd")).atStartOfDay();
         } catch (Exception e) {
-            // Handle parsing errors
-            System.out.println("Error parsing date: " + e.getMessage());
+            System.out.println("Error parsing date '" + utcDate + "': " + e.getMessage());
         }
         return null;
-
     }
     public String status;
     public int minute;

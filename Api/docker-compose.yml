@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: soccer442
+      POSTGRES_USER: soccer442
+      POSTGRES_PASSWORD: soccer442
+    ports:
+      - "5432:5432"
+    volumes:
+      - soccer442-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U soccer442"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./Soccer442.Api
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__Default: "Host=postgres;Port=5432;Database=soccer442;Username=soccer442;Password=soccer442"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  soccer442-postgres-data:

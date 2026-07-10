@@ -56,20 +56,8 @@ public class fixtureListAdapter  extends BaseAdapter {
             rowView = inflater.inflate(R.layout.template_game, parent,false);
             RowDataViewHolder viewHolder = new RowDataViewHolder();
             viewHolder.awayTeamImage = (ImageView) rowView.findViewById(R.id.awayTeamImage);
-            if(!result.awayTeam.crest.endsWith(".svg")) {
-                Glide.with(contextView).load(result.awayTeam.crest).into(viewHolder.awayTeamImage);
-            }
-            else {
-                new SvgImageLoader().loadSvgImage(contextView, result.awayTeam.crest, viewHolder.awayTeamImage);
-            }
             viewHolder.score = (TextView) rowView.findViewById(R.id.score);
             viewHolder.homeTeamImage = (ImageView) rowView.findViewById(R.id.homeTeamImage);
-            if(!result.homeTeam.crest.endsWith(".svg")) {
-                Glide.with(contextView).load(result.homeTeam.crest).into(viewHolder.homeTeamImage);
-            }
-            else {
-                new SvgImageLoader().loadSvgImage(contextView, result.homeTeam.crest, viewHolder.homeTeamImage);
-            }
             viewHolder.date = (TextView) rowView.findViewById(R.id.date);
             viewHolder.title = (TextView) rowView.findViewById(R.id.title);
             viewHolder.homeTeamName = (TextView) rowView.findViewById(R.id.homeTeamName);
@@ -80,12 +68,14 @@ public class fixtureListAdapter  extends BaseAdapter {
 
         RowDataViewHolder holder = (RowDataViewHolder) rowView.getTag();
 
-
-        utility.GetMeAnImage(holder.homeTeamName, result.homeTeam.name);
+        // (Re)loaded on every bind, not just when the row view is first created - ListView
+        // recycles row views, and a recycled view otherwise keeps showing whatever crest/badge
+        // an earlier, unrelated row happened to load into it.
+        utility.ShowTeamBadge(contextView, result.homeTeam, holder.homeTeamImage, holder.homeTeamName);
         holder.score.setText("VS");
-        utility.GetMeAnImage(holder.awayTeamName, result.awayTeam.name);
+        utility.ShowTeamBadge(contextView, result.awayTeam, holder.awayTeamImage, holder.awayTeamName);
         holder.title.setText(_txt);
-        holder.date.setText(result.utcDate.toString() );//+ " " + result.Time);
+        holder.date.setText(utility.FormatMatchDate(result.utcDate));
 
         //ViewGroup.LayoutParams params = rowView.getLayoutParams();
 //        rowView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,175));

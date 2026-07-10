@@ -9,13 +9,74 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b131f82c-f2b2-42c9-a268-0fc0d7046672" name="Changes" comment="" />
+    <list default="true" id="b131f82c-f2b2-42c9-a268-0fc0d7046672" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/AndroidProjectSystem.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/migrations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/Utility.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/Utility.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/WebDog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_competition_menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_competition_menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_live_commentry.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_live_commentry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_news_article.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/fixtureListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/fixtureListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/fixtures_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/fixtures_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/AppConfigFootballData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/Area.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/Area.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/FootballData.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/FootballData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/FootballMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/FootballMatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/Score.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/Score.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/TableItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/TableItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/liveListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/liveListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/live_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/live_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/logListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/logListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/log_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/log_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/news_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/news_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/resultsListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/resultsListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/results_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/results_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/scorerListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/scorerListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/scorer_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/scorer_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/settings_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/settings_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/summary_activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/summary_activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/actiity_summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/actiity_summary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_fixtures.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_fixtures.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_live.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_live.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_log.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_log.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_news.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_news.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_news_article.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_results.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_results.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_scorer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_scorer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_live_commentry.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_live_commentry.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/news_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/news_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/template_game.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/template_game.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/template_log_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/template_log_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/template_scorer_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/template_scorer_item.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R5CT30DJFCY]" />
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[PhysicalDevice::serial=pfnnrwhqmfcuprvk]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -28,12 +89,19 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6,
+  "fromUser": false
+}]]></component>
   <component name="ProjectId" id="2ZOSqMCiLeGR3bfn3pdIYD3Hhtx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -41,13 +109,21 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Android App.app.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "android-custom-viewC:/Users/Linda/AppData/Local/Android/Sdk/sources/android-34/android/widget/ListView.java_SELECTED": "ListView",
+    "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.android.tools.idea.devicemanager.tab": "Physical",
-    "last_opened_file_path": "C:/Play/Soccer_442",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Dev/Soccer_442/Android/Soccer_442",
     "settings.editor.selected.configurable": "device.mirroring"
   }
 }]]></component>
@@ -58,7 +134,8 @@
   </component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="Soccer_442.app.main" />
+      <module name="Soccer_442.app" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
@@ -66,15 +143,17 @@
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ALL_USERS" value="false" />
       <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
       <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
-      <option name="INSPECTION_WITHOUT_ACTIVITY_RESTART" value="false" />
       <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
       <option name="DEBUGGER_TYPE" value="Auto" />
       <Auto>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -83,7 +162,6 @@
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Auto>
       <Hybrid>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -92,11 +170,9 @@
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Hybrid>
       <Java>
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Java>
       <Native>
         <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
@@ -105,7 +181,6 @@
         <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
         <option name="SHOW_OPTIMIZED_WARNING" value="true" />
         <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
-        <option name="DEBUG_SANDBOX_SDK" value="false" />
       </Native>
       <Profilers>
         <option name="ADVANCED_PROFILING_ENABLED" value="false" />
@@ -116,6 +191,7 @@
         <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
       </Profilers>
       <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
       <option name="ACTIVITY_CLASS" value="" />
       <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
       <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
@@ -140,17 +216,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/log_activity.java</url>
-          <line>70</line>
+          <line>82</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/log_activity.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/summary_activity.java</url>
-          <line>304</line>
+          <line>399</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -160,27 +231,27 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/results_activity.java</url>
-          <line>99</line>
+          <line>122</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/results_activity.java</url>
-          <line>101</line>
+          <line>124</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>80</line>
+          <line>81</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>95</line>
+          <line>100</line>
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>85</line>
+          <line>86</line>
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -195,47 +266,47 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>151</line>
+          <line>184</line>
           <option name="timeStamp" value="50" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>160</line>
+          <line>194</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>99</line>
+          <line>109</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>115</line>
+          <line>129</line>
           <option name="timeStamp" value="53" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>125</line>
+          <line>143</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>219</line>
+          <line>258</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>201</line>
+          <line>239</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_past_commentry.java</url>
-          <line>222</line>
+          <line>261</line>
           <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/summary_activity.java</url>
-          <line>624</line>
+          <line>771</line>
           <option name="timeStamp" value="61" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -245,37 +316,37 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/summary_activity.java</url>
-          <line>631</line>
+          <line>778</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_live_commentry.java</url>
-          <line>95</line>
+          <line>102</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_live_commentry.java</url>
-          <line>91</line>
+          <line>93</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_live_commentry.java</url>
-          <line>85</line>
+          <line>83</line>
           <option name="timeStamp" value="67" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_live_commentry.java</url>
-          <line>208</line>
+          <line>243</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/activity_live_commentry.java</url>
-          <line>88</line>
+          <line>86</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/nyoka/soccer_442/football_data/FootballData.java</url>
-          <line>90</line>
+          <line>111</line>
           <option name="timeStamp" value="71" />
         </line-breakpoint>
       </breakpoints>

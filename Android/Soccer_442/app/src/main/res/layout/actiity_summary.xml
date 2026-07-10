@@ -9,6 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
+    <include layout="@layout/progress_bar_top" />
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -43,7 +44,6 @@
              android:id="@+id/competionSpinner"
              android:layout_width="fill_parent"
              android:layout_height="fill_parent"
-             android:entries="@array/comp_arrays"
              android:prompt="@string/comp_prompt">
 
              </Spinner>
@@ -81,7 +81,18 @@
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_gravity="center"
-                android:weightSum="8">
+                android:weightSum="10">
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text="#"
+                    android:textSize="11sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#FCFAFA"
+                    android:textStyle="bold"
+                    android:layout_weight="1"/>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -101,7 +112,13 @@
 
                 </LinearLayout>
 
-
+                <!-- Spacer matching template_log_item's competitionCode column so header
+                     labels line up with row values in both normal and My Teams mode. -->
+                <TextView
+                    android:layout_width="20dp"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_weight="1"/>
 
                 <TextView
                     android:id="@+id/p"
@@ -171,6 +188,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="There are no fixtures."
+            android:textColor="#FCFAFA"
             android:visibility="gone"
             android:layout_margin="10dp"
             />
@@ -204,6 +222,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="There are no fixtures."
+                android:textColor="#FCFAFA"
                 android:visibility="gone"
                 android:layout_margin="10dp"
                 />
@@ -238,6 +257,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="There are no live games."
+                android:textColor="#FCFAFA"
                 android:visibility="gone"
                 android:layout_margin="10dp"
                 />
@@ -271,7 +291,8 @@
             <TextView android:id="@+id/comm_empty_results"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="There is no commentary for this game yet."
+                android:text="There are no results."
+                android:textColor="#FCFAFA"
                 android:visibility="gone"
                 android:layout_margin="10dp"
                 />
@@ -386,7 +407,8 @@
         <TextView android:id="@+id/comm_empty_scorer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="There are no fixtures."
+            android:text="There are no goal scorers at this point."
+            android:textColor="#FCFAFA"
             android:visibility="gone"
             android:layout_margin="10dp"
             />
@@ -424,6 +446,7 @@
                 android:id="@+id/newsTitle"
 
                 android:text="News title"
+                android:textColor="#FCFAFA"
                 android:layout_width="wrap_content"
                 android:layout_height="17dp" />
 
@@ -438,9 +461,12 @@
     </LinearLayout>
     <LinearLayout
         android:background="@drawable/panel"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="45dp">
+        <!-- #26: "My Teams" is a settings toggle now, not its own destination - the
+             standalone screen/button from #19 is retired; the toggle lives in Settings
+             alongside the team list it filters by. -->
         <Button
             android:id="@+id/btnCommentary"
             android:layout_width="100dp"

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Slim indeterminate loading bar pinned to the top of a screen - non-blocking (unlike the
+     ProgressDialog it replaces, content underneath stays visible/interactive), shown/hidden via
+     Utility.ShowLoading(Activity)/HideLoading(Activity). Include as the FIRST child of an
+     activity's root layout so it always renders above everything else.
+     Explicit tint + 6dp (not the platform default, which is an unthemed, easy-to-miss thin
+     gray line at 4dp on this app's dark background) so it's actually noticeable, especially
+     for My Teams' longer (13-competition) loads where it's the only feedback on screen. -->
+<ProgressBar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/topProgressBar"
+    style="?android:attr/progressBarStyleHorizontal"
+    android:layout_width="match_parent"
+    android:layout_height="6dp"
+    android:indeterminate="true"
+    android:indeterminateTint="#00C853"
+    android:visibility="gone" />

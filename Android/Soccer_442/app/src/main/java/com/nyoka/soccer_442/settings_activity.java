@@ -5,8 +5,14 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Created by linda.nyoka on 2015-05-13.
@@ -34,6 +40,7 @@ public class settings_activity  extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        Utility.ApplyEdgeToEdgeInsets(this);
         Start();
     }
     private void Start()
@@ -45,6 +52,61 @@ public class settings_activity  extends Activity {
         HandleUpdate();
         InitializeOptions();
         SetCheckListeners();
+        HandleSupportedTeams();
+    }
+
+    /** #18: lets the user add/remove the team(s) they support, for #19's "My Teams" mode. */
+    private void HandleSupportedTeams() {
+        final EditText input = (EditText) findViewById(R.id.teamNameInput);
+        Button addButton = (Button) findViewById(R.id.btnAddTeam);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String teamName = input.getText().toString().trim();
+                if (teamName.isEmpty()) return;
+                profile.addSupportedTeam(teamName);
+                input.setText("");
+                RefreshSupportedTeams();
+            }
+        });
+
+        RefreshSupportedTeams();
+    }
+
+    private void RefreshSupportedTeams() {
+        LinearLayout list = (LinearLayout) findViewById(R.id.supportedTeamsList);
+        list.removeAllViews();
+
+        List<String> teams = profile.getSupportedTeams();
+        for (final String teamName : teams) {
+            LinearLayout row = new LinearLayout(this);
+            row.setOrientation(LinearLayout.HORIZONTAL);
+            row.setPadding(0, 4, 0, 4);
+
+            TextView nameView = new TextView(this);
+            nameView.setText(teamName);
+            nameView.setTextColor(0xFFFCFAFA);
+            LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(
+                    0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
+            nameParams.gravity = android.view.Gravity.CENTER_VERTICAL;
+            row.addView(nameView, nameParams);
+
+            TextView removeView = new TextView(this);
+            removeView.setText("Remove");
+            removeView.setTextColor(0xFFFF8080);
+            removeView.setPadding(20, 0, 0, 0);
+            removeView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    profile.removeSupportedTeam(teamName);
+                    RefreshSupportedTeams();
+                }
+            });
+            row.addView(removeView);
+
+            list.addView(row);
+        }
     }
     public void InitializeOptions()
     {

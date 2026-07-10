@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Dark-theme dropdown background for the Log screen's group selector (#27) - same palette
+     as green_button.xml so it reads as part of this app's UI instead of the stock light
+     Android btn_dropdown look it replaces. No built-in arrow graphic (unlike btn_dropdown) -
+     activity_log.xml layers a small "▼" TextView on top instead. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:startColor="#002000"
+        android:centerColor="#004000"
+        android:endColor="#002000"
+        android:angle="270" />
+    <corners android:radius="5dp" />
+    <stroke android:width="1px" android:color="#007000" />
+</shape>

@@ -36,10 +36,10 @@ public class results_activity extends AppCompatActivity {
      protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+        Utility.ApplyEdgeToEdgeInsets(this);
         getSupportActionBar().hide();
         context = this;
         competition = new UserProfile(this).getFavourateLeague();
-        ((TextView) findViewById(R.id.competitionName)).setText(competition.toString());
         ShowSavedResults();
         Initialize();
 
@@ -59,10 +59,31 @@ public class results_activity extends AppCompatActivity {
     private void Initialize()
     {
         if(ShowError()) return;
-        dialog = new ProgressDialog(results_activity.this);
-        dialog.setMessage("Getting " + competition.toString() + " results");
-        dialog.setIndeterminate(true);
-        dialog.show();
+
+        // #26: My Teams mode - merged results across every competition a supported team is
+        // in, instead of one competition at a time.
+        final List<String> supportedTeams = new UserProfile(this).getSupportedTeams();
+        if ("My Teams".equals(competition) && !supportedTeams.isEmpty()) {
+            ((TextView) findViewById(R.id.competitionName)).setText("My Teams");
+            Utility.ShowLoading(this);
+            final Thread myTeamsThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    final MyTeamsData.MyTeamsResult result = new MyTeamsData().load(supportedTeams);
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Utility.HideLoading(results_activity.this);
+                            ShowResults(result.results, false);
+                        }
+                    });
+                }
+            });
+            myTeamsThread.start();
+            return;
+        }
+
+        ((TextView) findViewById(R.id.competitionName)).setText(competition.toString());
+        Utility.ShowLoading(this);
         final Thread eThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -71,7 +92,7 @@ public class results_activity extends AppCompatActivity {
                 final MatchResponse results =superSport.GetResults(competition);
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        dialog.hide();
+                        Utility.HideLoading(results_activity.this);
                         ShowResults(results.matches,false);
                         new LeagueSavedState(context).SaveResults(competition,results.matches);
                     }
@@ -84,7 +105,10 @@ public class results_activity extends AppCompatActivity {
     {
         if(results != null) {
             resultsListView = (ListView) findViewById(R.id.resultsListView);
-            Collections.sort(results, Comparator.comparing(FootballMatch::GetDate).reversed());
+            // Most recent result first. nullsLast must wrap reverseOrder() directly (not
+            // Comparator.comparing(...).reversed() as a whole) - reversed() on a comparator
+            // that already places nulls last would flip nulls to sort first instead.
+            Collections.sort(results, Comparator.comparing(FootballMatch::GetDate, Comparator.nullsLast(Comparator.<java.time.LocalDateTime>reverseOrder())));
             resultsListAdapter = new resultsListAdapter(context, results, "");
             resultsListView.setAdapter(resultsListAdapter);
             TextView empty = (TextView) findViewById(R.id.comm_empty);
@@ -99,7 +123,7 @@ public class results_activity extends AppCompatActivity {
 
                     FootballMatch live = (FootballMatch) resultsListAdapter.getItem(position);
 
-                    //GoToCommentry(live);
+                    GoToCommentry(live);
                 }
             });
 

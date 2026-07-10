@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="2dp">
+
+    <FrameLayout
+        android:layout_width="40dp"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/chipPhoto"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/pitch_chip_circle"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/chipNumber"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="bottom|end"
+            android:background="@drawable/pitch_number_badge"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="9sp"
+            android:textStyle="bold" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/chipName"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="#FFFFFF"
+        android:textSize="9sp"
+        android:shadowColor="#000000"
+        android:shadowRadius="3"
+        android:shadowDx="0"
+        android:shadowDy="0" />
+</LinearLayout>

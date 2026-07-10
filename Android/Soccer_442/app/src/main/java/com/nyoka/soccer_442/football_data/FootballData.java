@@ -1,41 +1,53 @@
 package com.nyoka.soccer_442.football_data;
 
-import com.nyoka.soccer_442.Comment;
-import com.nyoka.soccer_442.Fixture;
-import com.nyoka.soccer_442.GameStats;
-import com.nyoka.soccer_442.LineUp;
-import com.nyoka.soccer_442.Live;
-import com.nyoka.soccer_442.LogItem;
-import com.nyoka.soccer_442.NewsItem;
-import com.nyoka.soccer_442.Result;
-import com.nyoka.soccer_442.TopGoalScorer;
-import com.nyoka.soccer_442.WebDog;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import android.content.Context;
 
 import com.google.gson.Gson;
+import com.nyoka.soccer_442.HeadToHeadSummary;
+import com.nyoka.soccer_442.Soccer442Application;
+import com.nyoka.soccer_442.data.AppDatabase;
+import com.nyoka.soccer_442.data.entity.CachedMatchEntity;
+import com.nyoka.soccer_442.data.entity.CachedScorerEntity;
+import com.nyoka.soccer_442.data.entity.CachedStandingsEntity;
+import com.nyoka.soccer_442.data.entity.SyncStateEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * All the fetching/parsing/fallback logic that used to live here (talking to ESPN, BBC,
+ * OpenLigaDB, TheSportsDB directly) now lives server-side in Soccer442.Api (see /Api at the
+ * repo root) - this class's job is now purely the incremental-sync dance against that API:
+ * read this device's last-synced timestamp for a resource out of Room, send it as `?since=`,
+ * merge whatever changed into Room, bump the synced timestamp to the server's own clock, then
+ * read the full current set back out of Room for the caller. Every public method here keeps
+ * its exact old signature so none of this app's ~15 call sites needed to change.
+ */
 public class FootballData {
 
-    AppConfigFootballData _uriProvider = new AppConfigFootballData();
-    private String competitionCode;
+    private final Context context;
+    private final ApiClient api = new ApiClient();
+    private final Gson gson = new Gson();
 
+    public FootballData() {
+        context = Soccer442Application.getAppContext();
+    }
 
     public Response GetCompetitions() {
-        try {
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetCompetitionsUri());
-            Gson gson = new Gson();
-            Response standingsResponse = gson.fromJson(value, Response.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
+        Response response = new Response();
+        List<Competition> competitions = new ArrayList<>();
+        for (CompetitionMap.Info info : CompetitionMap.all()) {
+            Competition c = new Competition();
+            c.name = info.name;
+            c.code = info.code;
+            c.area = new Area();
+            c.area.name = info.areaName;
+            competitions.add(c);
         }
+        response.competitions = competitions;
+        return response;
     }
+
     public static String GetCompetitionCode(String teamName) {
         switch (teamName) {
             case "Campeonato Brasileiro Série A":
@@ -71,234 +83,162 @@ public class FootballData {
         }
     }
 
-    public Live GetMatchDetails(Live game, String competition, String matchId) {
-        try {
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetMatchDetails(matchId));
-            return Commentry(game, value);
-        } catch (Exception ex) {
-
-            return null;
-        }
+    public FootballMatch GetMatchDetails(String competition, String matchId) {
+        CompetitionMap.Info info = CompetitionMap.byCode(GetCompetitionCode(competition));
+        if (info == null) return null;
+        return api.getMatchDetails(info.code, matchId);
     }
-    public FootballMatch GetMatchDetails( String competition, String matchId) {
-        try {
-            String competitionCode =  GetCompetitionCode(competition);
 
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetMatchDetails(matchId));
-            Gson gson = new Gson();
-            FootballMatch standingsResponse = gson.fromJson(value, FootballMatch.class);
-            return standingsResponse;
-        } catch (Exception ex) {
+    public ArrayList<com.nyoka.soccer_442.Comment> GetCommentary(String competition, String matchId) {
+        CompetitionMap.Info info = CompetitionMap.byCode(GetCompetitionCode(competition));
+        if (info == null) return new ArrayList<>();
+        return api.getCommentary(info.code, matchId);
+    }
 
-            return null;
-        }
+    public HeadToHeadSummary GetHeadToHeadAndForm(String competition, String matchId, String homeTeamName, String awayTeamName) {
+        return GetHeadToHeadAndForm(competition, matchId, homeTeamName, awayTeamName, null);
+    }
+
+    public HeadToHeadSummary GetHeadToHeadAndForm(String competition, String matchId, String homeTeamName, String awayTeamName, String utcDate) {
+        CompetitionMap.Info info = CompetitionMap.byCode(GetCompetitionCode(competition));
+        if (info == null) return null;
+        return api.getHeadToHeadAndForm(info.code, matchId, homeTeamName, awayTeamName, utcDate);
+    }
+
+    /** Legacy entry point, unused by any activity - the cross-competition scan this used to do
+     * isn't supported by the new API (which needs a competition code up front), so this now
+     * fails soft rather than reproducing that scan client-side for genuinely dead code. */
+    public MatchResponse GetStats(String matchId) {
+        return emptyMatchResponse();
+    }
+
+    /** Legacy entry point, unused by any activity - see GetStats. */
+    public MatchResponse GetLineUp(String matchId) {
+        return emptyMatchResponse();
+    }
+
+    private MatchResponse emptyMatchResponse() {
+        MatchResponse response = new MatchResponse();
+        response.matches = new ArrayList<>();
+        return response;
     }
 
     public MatchResponse GetFixture(String competition) {
-        try {
-            String competitionCode =  GetCompetitionCode(competition);
-
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetFixtureUri(competitionCode));
-            Gson gson = new Gson();
-            MatchResponse standingsResponse = gson.fromJson(value, MatchResponse.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
-        }
+        return syncMatches(competition, "fixture");
     }
-    public MatchResponse GetStats(String matchId)
-    {
-        try {
-            String competitionCode =  GetCompetitionCode(matchId);
 
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetStatsUri(matchId));
-            Gson gson = new Gson();
-            MatchResponse standingsResponse = gson.fromJson(value, MatchResponse.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
-        }
-    }
-    public MatchResponse GetLineUp(String matchId)
-    {
-        try {
-            String competitionCode =  GetCompetitionCode(matchId);
-
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetLineUpUri(matchId));
-            Gson gson = new Gson();
-            MatchResponse standingsResponse = gson.fromJson(value, MatchResponse.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
-        }
-    }
     public MatchResponse GetResults(String competition) {
-        try {
-            String competitionCode =  GetCompetitionCode(competition);
-
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetResultsUri(competitionCode));
-            Gson gson = new Gson();
-            MatchResponse standingsResponse = gson.fromJson(value, MatchResponse.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
-        }
-
-    }
-
-    public ScorerResponse GetScorers(String competition) {
-        try {
-            String competitionCode =  GetCompetitionCode(competition);
-
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetScorersUr(competitionCode));
-            Gson gson = new Gson();
-            ScorerResponse standingsResponse = gson.fromJson(value, ScorerResponse.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
-        }
-    }
-
-    public StandingsResponse GetLog(String competition) {
-        try {
-            String competitionCode =  GetCompetitionCode(competition);
-
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetLogUri(competitionCode));
-            Gson gson = new Gson();
-            StandingsResponse standingsResponse = gson.fromJson(value, StandingsResponse.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
-        }
+        return syncMatches(competition, "result");
     }
 
     public MatchResponse GetLive(String competition) {
-        try {
-
-            String competitionCode =  GetCompetitionCode(competition);
-            WebDog dog = new WebDog();
-            String value = dog.Fetch(_uriProvider.GetLiveUri(competitionCode));
-            Gson gson = new Gson();
-            MatchResponse standingsResponse = gson.fromJson(value, MatchResponse.class);
-            return standingsResponse;
-        } catch (Exception ex) {
-
-            return null;
-        }
+        return syncMatches(competition, "live");
     }
 
-    private GameStats GetStatsFromFile(String html)
-    {
-        return  null;
-    }
+    private MatchResponse syncMatches(String competition, String status) {
+        MatchResponse response = emptyMatchResponse();
+        CompetitionMap.Info info = CompetitionMap.byCode(GetCompetitionCode(competition));
+        if (info == null) return response;
 
-    private ArrayList<LogItem> Logs(ArrayList<ArrayList<String>> pieces, Competition competition) {
-        return  null;
-    }
+        AppDatabase db = AppDatabase.getInstance(context);
+        String key = "matches:" + info.code + ":" + status;
+        SyncStateEntity state = db.syncStateDao().get(key);
+        String since = state != null ? state.lastSyncedUtc : null;
 
-    private boolean IsInt(String value) {
-        try {
-            Integer.parseInt(value);
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
-
-    private ArrayList<Result> Results(String htmlTable, String mobi) {
-
-        return  null;
-
-    }
-    private LineUp LineUp(String htmlTable)
-    {
-        return  null;
-
-
-    }
-    private ArrayList<Fixture> Fixtures(String htmlTable) {
-        return  null;
-    }
-
-
-    private Date ParseDate(String value) {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        try {
-            Date start = simpleDateFormat.parse(value);
-            //calendar.setTime(start); // comment out to test current time
-            return start;
-        } catch (Exception ex) {
-            return null;
-        }
-    }
-
-    private boolean IsDate(String value) {
-        try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-            Date start = simpleDateFormat.parse(value);
-            return true;
-        } catch (Exception ex) {
-            return false;
+        SyncEnvelope<FootballMatch> envelope = api.getMatches(info.code, status, since);
+        if (envelope != null && envelope.items != null) {
+            for (FootballMatch match : envelope.items) {
+                CachedMatchEntity row = new CachedMatchEntity();
+                row.competitionCode = info.code;
+                row.status = status;
+                row.matchId = String.valueOf(match.id);
+                row.rawJson = gson.toJson(match);
+                row.updatedUtc = envelope.serverTimeUtc;
+                db.cachedMatchDao().upsert(row);
+            }
+            SyncStateEntity newState = new SyncStateEntity();
+            newState.endpointKey = key;
+            newState.lastSyncedUtc = envelope.serverTimeUtc;
+            db.syncStateDao().upsert(newState);
         }
 
-
+        List<CachedMatchEntity> rows = db.cachedMatchDao().getAll(info.code, status);
+        List<FootballMatch> matches = new ArrayList<>();
+        for (CachedMatchEntity row : rows) {
+            FootballMatch match = gson.fromJson(row.rawJson, FootballMatch.class);
+            if (match != null) matches.add(match);
+        }
+        response.matches = matches;
+        Competition comp = new Competition();
+        comp.name = info.name;
+        comp.code = info.code;
+        response.competition = comp;
+        return response;
     }
 
-    private ArrayList<Live> Live(String content) {
+    public ScorerResponse GetScorers(String competition) {
+        ScorerResponse response = new ScorerResponse();
+        response.scorers = new ArrayList<>();
+        CompetitionMap.Info info = CompetitionMap.byCode(GetCompetitionCode(competition));
+        if (info == null) return response;
 
-        return  null;
-    }
-    private ArrayList<NewsItem> NewsList(String content) {
-        return  null;
-    }
+        AppDatabase db = AppDatabase.getInstance(context);
+        String key = "scorers:" + info.code;
+        SyncStateEntity state = db.syncStateDao().get(key);
+        String since = state != null ? state.lastSyncedUtc : null;
 
-    private String NewsArticle(String content)
-    {
-        return  null;
-    }
-    private Live Commentry(Live game, String content) {
+        SyncEnvelope<ScorerResponse> envelope = api.getScorers(info.code, since);
+        if (envelope != null && envelope.items != null) {
+            if (!envelope.items.isEmpty()) {
+                CachedScorerEntity row = new CachedScorerEntity();
+                row.competitionCode = info.code;
+                row.rawJson = gson.toJson(envelope.items.get(0));
+                row.updatedUtc = envelope.serverTimeUtc;
+                db.cachedScorerDao().upsert(row);
+            }
+            SyncStateEntity newState = new SyncStateEntity();
+            newState.endpointKey = key;
+            newState.lastSyncedUtc = envelope.serverTimeUtc;
+            db.syncStateDao().upsert(newState);
+        }
 
-        return  null;
-    }
-    private Result Commentry(Result game, String content) {
-
-        return  null;
-    }
-
-    private Live GetScorers(Live game, ArrayList<String> rawData) {
-        return  null;
-    }
-    private Result GetScorers(Result game, ArrayList<String> rawData) {
-        return  null;
-    }
-
-
-    private ArrayList<Comment> Comments(String rawData) {
-        return  null;
-    }
-
-    private ArrayList<Live> Live(ArrayList<String> rawLive) {
-        return  null;
-    }
-
-    private ArrayList<TopGoalScorer> Scorers(String htmlTable) {
-       return  null;
+        CachedScorerEntity row = db.cachedScorerDao().get(info.code);
+        if (row != null) {
+            ScorerResponse cached = gson.fromJson(row.rawJson, ScorerResponse.class);
+            if (cached != null) return cached;
+        }
+        Competition comp = new Competition();
+        comp.name = info.name;
+        comp.code = info.code;
+        response.competition = comp;
+        return response;
     }
 
+    public StandingsResponse GetLog(String competition) {
+        CompetitionMap.Info info = CompetitionMap.byCode(GetCompetitionCode(competition));
+        if (info == null) return null;
 
+        AppDatabase db = AppDatabase.getInstance(context);
+        String key = "standings:" + info.code;
+        SyncStateEntity state = db.syncStateDao().get(key);
+        String since = state != null ? state.lastSyncedUtc : null;
+
+        SyncEnvelope<StandingsResponse> envelope = api.getStandings(info.code, since);
+        if (envelope != null && envelope.items != null) {
+            if (!envelope.items.isEmpty()) {
+                CachedStandingsEntity row = new CachedStandingsEntity();
+                row.competitionCode = info.code;
+                row.rawJson = gson.toJson(envelope.items.get(0));
+                row.updatedUtc = envelope.serverTimeUtc;
+                db.cachedStandingsDao().upsert(row);
+            }
+            SyncStateEntity newState = new SyncStateEntity();
+            newState.endpointKey = key;
+            newState.lastSyncedUtc = envelope.serverTimeUtc;
+            db.syncStateDao().upsert(newState);
+        }
+
+        CachedStandingsEntity row = db.cachedStandingsDao().get(info.code);
+        return row != null ? gson.fromJson(row.rawJson, StandingsResponse.class) : null;
+    }
 }

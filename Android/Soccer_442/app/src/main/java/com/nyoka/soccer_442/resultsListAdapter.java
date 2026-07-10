@@ -53,24 +53,8 @@ public class resultsListAdapter extends BaseAdapter {
             rowView = inflater.inflate(R.layout.template_game, parent, false);
             RowDataViewHolder viewHolder = new RowDataViewHolder();
             viewHolder.awayTeamImage = (ImageView) rowView.findViewById(R.id.awayTeamImage);
-            if(!result.awayTeam.crest.endsWith(".svg")) {
-                Glide.with(contextView).load(result.awayTeam.crest).into(viewHolder.awayTeamImage);
-            }
-            else {
-                new SvgImageLoader().loadSvgImage(contextView, result.awayTeam.crest, viewHolder.awayTeamImage);
-            }
             viewHolder.score = (TextView) rowView.findViewById(R.id.score);
             viewHolder.homeTeamImage = (ImageView) rowView.findViewById(R.id.homeTeamImage);
-
-            if(!result.homeTeam.crest.endsWith(".svg")) {
-                Glide.with(contextView).load(result.homeTeam.crest).into(viewHolder.homeTeamImage);
-            }
-            else {
-                new SvgImageLoader().loadSvgImage(contextView, result.homeTeam.crest, viewHolder.homeTeamImage);
-            }
-
-
-
             viewHolder.date = (TextView) rowView.findViewById(R.id.date);
             viewHolder.title = (TextView) rowView.findViewById(R.id.title);
             viewHolder.homeTeamName = (TextView) rowView.findViewById(R.id.homeTeamName);
@@ -80,15 +64,28 @@ public class resultsListAdapter extends BaseAdapter {
 
         RowDataViewHolder holder = (RowDataViewHolder) rowView.getTag();
 
+        // (Re)loaded on every bind, not just when the row view is first created - ListView
+        // recycles row views, and a recycled view otherwise keeps showing whatever crest/badge
+        // an earlier, unrelated row happened to load into it.
+        utility.ShowTeamBadge(contextView, result.homeTeam, holder.homeTeamImage, holder.homeTeamName);
 
-        utility.GetMeAnImage(holder.homeTeamName, result.homeTeam.name);
-
-
-
-        holder.score.setText(result.score.fullTime.home + " - " + result.score.fullTime.away);
-        utility.GetMeAnImage(holder.awayTeamName, result.awayTeam.name);
-        holder.title.setText(_txt);
-        holder.date.setText(result.utcDate.toString());
+        holder.score.setText(utility.FormatScore(result.score));
+        // This column is narrow (weight 0.39 of the row, 20dp padding each side) - a plain
+        // "1 - 1" fits at 28sp, but a penalty-shootout suffix needs to shrink to fit at all.
+        holder.score.setTextSize(result.score.penaltyHome != null ? 12 : 28);
+        utility.ShowTeamBadge(contextView, result.awayTeam, holder.awayTeamImage, holder.awayTeamName);
+        // _txt is a single fixed label for every row ("Results"/"Fixtures"/...) - empty in
+        // My Teams mode (there's no one fixed competition to label rows with), where each
+        // match's own competition is shown per-row instead, since rows can come from any of
+        // several competitions merged together.
+        if (_txt != null && !_txt.isEmpty()) {
+            holder.title.setText(_txt);
+        } else if (result.competition != null && result.competition.name != null) {
+            holder.title.setText(result.competition.name);
+        } else {
+            holder.title.setText("");
+        }
+        holder.date.setText(utility.FormatMatchDate(result.utcDate));
         return rowView;
     }
 

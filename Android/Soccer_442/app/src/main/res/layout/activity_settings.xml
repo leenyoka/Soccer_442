@@ -25,6 +25,7 @@
                     android:layout_width="110dp"
                     android:layout_gravity="left"
                     android:text="Favourate : "
+                    android:textColor="#FCFAFA"
                     android:gravity="center"
                     android:layout_height="fill_parent" />
                 <Spinner
@@ -65,6 +66,7 @@
                     android:layout_width="110dp"
                     android:layout_gravity="left"
                     android:text="Load favourite (app start) : "
+                    android:textColor="#FCFAFA"
                     android:gravity="center"
                     android:layout_height="fill_parent" />
                 <Spinner
@@ -102,6 +104,7 @@
                     android:layout_width="110dp"
                     android:layout_gravity="left"
                     android:text="When to update : "
+                    android:textColor="#FCFAFA"
                     android:gravity="center"
                     android:layout_height="fill_parent" />
                 <Spinner
@@ -140,7 +143,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Show : " />
+                    android:text="Show : "
+                    android:textColor="#FCFAFA" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -152,30 +156,35 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:tag="0"
+                        android:textColor="#FCFAFA"
                         android:text="Logs" />
                     <CheckBox
                         android:id="@+id/cmbResults"
                         android:tag="1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#FCFAFA"
                         android:text="Results" />
                     <CheckBox
                         android:id="@+id/cmbFixtures"
                         android:tag="2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#FCFAFA"
                         android:text="Fixtures" />
                     <CheckBox
                         android:id="@+id/cmbLive"
                         android:tag="3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#FCFAFA"
                         android:text="Live" />
                     <CheckBox
                         android:id="@+id/cmbScorers"
                         android:tag="4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#FCFAFA"
                         android:text="Goal scorers" />
 
                     <CheckBox
@@ -183,10 +192,68 @@
                         android:tag="5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="#FCFAFA"
                         android:text="News" />
                     </LinearLayout>
 
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/panel"
+            android:padding="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Teams : "
+                android:textColor="#FCFAFA"
+                android:layout_marginBottom="4dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/teamNameInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Team name (e.g. Arsenal)"
+                    android:textColor="#FCFAFA"
+                    android:textColorHint="#AAAAAA"
+                    android:inputType="textCapWords"
+                    android:imeOptions="actionDone" />
+
+                <Button
+                    android:id="@+id/btnAddTeam"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add" />
+
+            </LinearLayout>
+
+            <!-- Populated at runtime by settings_activity.RefreshSupportedTeams() - one row
+                 per team already in UserProfile.getSupportedTeams(), each with a remove button.
+                 "My Teams" itself is picked from the main dashboard's competition dropdown
+                 (like any other competition) rather than a toggle here - this section is just
+                 for managing which teams are followed. -->
+            <LinearLayout
+                android:id="@+id/supportedTeamsList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="6dp" />
 
         </LinearLayout>
 

@@ -18,7 +18,19 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:layout_gravity="center"
-            android:weightSum="8">
+            android:weightSum="10">
+            <TextView
+                android:id="@+id/position"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="11sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#FCFAFA"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -47,7 +59,19 @@
                     />
             </LinearLayout>
 
-
+            <!-- Only populated (short competition code, e.g. "PL"/"CL") in My Teams mode
+                 (#26), where one team's rows can span several competitions - gone/empty
+                 otherwise so the normal single-competition Log screen is unaffected. -->
+            <TextView
+                android:id="@+id/competitionCode"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="10sp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#AACCFF"
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/p"

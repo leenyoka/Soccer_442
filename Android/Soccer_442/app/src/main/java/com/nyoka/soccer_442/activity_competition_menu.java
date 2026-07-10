@@ -17,6 +17,7 @@ public class activity_competition_menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.competition_menu);
+        Utility.ApplyEdgeToEdgeInsets(this);
         getSupportActionBar().hide();
         context = activity_competition_menu.this;
             competition =(String) getIntent().getSerializableExtra("competition");

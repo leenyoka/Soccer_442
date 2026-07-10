@@ -2,6 +2,9 @@ package com.nyoka.soccer_442;
 
 import android.content.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by linda.nyoka on 2015-04-09.
  */
@@ -29,6 +32,51 @@ public class UserProfile {
         _teamName = name;
         _stateGuy.InitializeKey("team_name", name);
     }
+
+    // "|" rather than AppOptions' "_" - a real team name ("Inter Milan") could plausibly contain
+    // an underscore-adjacent word break, but never a literal pipe.
+    private static final String SUPPORTED_TEAMS_DELIMITER = "|";
+
+    /** The team(s) the user follows, for #19's "My Teams" cross-competition mode. */
+    public List<String> getSupportedTeams() {
+        String raw = _stateGuy.getKeyString("supported_teams");
+        List<String> teams = new ArrayList<>();
+        if (raw != null && !raw.trim().isEmpty()) {
+            for (String team : raw.split("\\" + SUPPORTED_TEAMS_DELIMITER)) {
+                if (!team.trim().isEmpty()) teams.add(team.trim());
+            }
+        }
+        return teams;
+    }
+
+    public void setSupportedTeams(List<String> teams) {
+        StringBuilder sb = new StringBuilder();
+        for (String team : teams) {
+            if (sb.length() > 0) sb.append(SUPPORTED_TEAMS_DELIMITER);
+            sb.append(team.trim());
+        }
+        _stateGuy.InitializeKey("supported_teams", sb.toString());
+    }
+
+    public void addSupportedTeam(String teamName) {
+        if (teamName == null || teamName.trim().isEmpty()) return;
+        List<String> teams = getSupportedTeams();
+        for (String existing : teams) {
+            if (existing.equalsIgnoreCase(teamName.trim())) return; // already there
+        }
+        teams.add(teamName.trim());
+        setSupportedTeams(teams);
+    }
+
+    public void removeSupportedTeam(String teamName) {
+        List<String> teams = getSupportedTeams();
+        List<String> remaining = new ArrayList<>();
+        for (String existing : teams) {
+            if (!existing.equalsIgnoreCase(teamName)) remaining.add(existing);
+        }
+        setSupportedTeams(remaining);
+    }
+
     public String getFavourateLeague()
     {
         if(_favourate_league != null && _favourate_league.trim() != "")

@@ -16,6 +16,7 @@ import com.nyoka.soccer_442.football_data.FootballMatch;
 import com.nyoka.soccer_442.football_data.MatchResponse;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by linda.nyoka on 2015-02-24.
@@ -30,10 +31,10 @@ public class live_activity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_live);
+        Utility.ApplyEdgeToEdgeInsets(this);
         getSupportActionBar().hide();
         context = this;
         competition = new UserProfile(this).getFavourateLeague();
-        ((TextView) findViewById(R.id.competitionName)).setText(competition.toString());
         Initialize();
 
     }
@@ -52,10 +53,31 @@ public class live_activity  extends AppCompatActivity {
     private void Initialize()
     {
         if(ShowError())return;
-        dialog = new ProgressDialog(live_activity.this);
-        dialog.setMessage("Getting " + competition.toString() + " live games");
-        dialog.setIndeterminate(true);
-        dialog.show();
+
+        // #26: My Teams mode - merged live matches across every competition a supported
+        // team is in, instead of one competition at a time.
+        final List<String> supportedTeams = new UserProfile(this).getSupportedTeams();
+        if ("My Teams".equals(competition) && !supportedTeams.isEmpty()) {
+            ((TextView) findViewById(R.id.competitionName)).setText("My Teams");
+            Utility.ShowLoading(this);
+            final Thread myTeamsThread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    final MyTeamsData.MyTeamsResult result = new MyTeamsData().load(supportedTeams);
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            Utility.HideLoading(live_activity.this);
+                            ShowLive(result.live);
+                        }
+                    });
+                }
+            });
+            myTeamsThread.start();
+            return;
+        }
+
+        ((TextView) findViewById(R.id.competitionName)).setText(competition.toString());
+        Utility.ShowLoading(this);
         final Thread eThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -64,36 +86,39 @@ public class live_activity  extends AppCompatActivity {
                 final MatchResponse results =superSport.GetLive(competition);
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        dialog.hide();
-
-                        if(results != null) {
-                            liveReesultsListView = (ListView) findViewById(R.id.liveListView);
-                            liveListAdapter = new liveListAdapter(context, results.matches, "");
-                            liveReesultsListView.setAdapter(liveListAdapter);
-                            TextView empty = (TextView) findViewById(R.id.comm_empty);
-                            liveReesultsListView.setEmptyView(empty);
-
-                            liveReesultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                                    FootballMatch live = (FootballMatch) liveListAdapter.getItem(position);
-
-                                    //GoToCommentry(live);
-                                }
-                            });
-
-                            if(results.matches.size() == 0)
-                                utility.showDialog("There are no live games for " + competition.toString(), false, "No live games",getSupportFragmentManager());
+                        Utility.HideLoading(live_activity.this);
+                        if (results != null) {
+                            ShowLive(results.matches);
+                        } else {
+                            utility.showDialog("Error retrieving data. Please try again later", false, "Error", getSupportFragmentManager());
                         }
-                        else utility.showDialog("Error retrieving data. Please try again later", false, "Error", getSupportFragmentManager());
-
                     }
                 });
 
             }
         });
         eThread.start();
+    }
+    private void ShowLive(List<FootballMatch> matches) {
+        liveReesultsListView = (ListView) findViewById(R.id.liveListView);
+        liveListAdapter = new liveListAdapter(context, matches, "");
+        liveReesultsListView.setAdapter(liveListAdapter);
+        TextView empty = (TextView) findViewById(R.id.comm_empty);
+        liveReesultsListView.setEmptyView(empty);
+
+        liveReesultsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                FootballMatch live = (FootballMatch) liveListAdapter.getItem(position);
+
+                GoToCommentry(live);
+            }
+        });
+
+        if (matches.size() == 0) {
+            utility.showDialog("There are no live games right now", false, "No live games", getSupportFragmentManager());
+        }
     }
     private void GoToCommentry(FootballMatch match)
     {

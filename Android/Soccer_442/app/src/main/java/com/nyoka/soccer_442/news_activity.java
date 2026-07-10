@@ -35,18 +35,13 @@ public class news_activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        Utility.ApplyEdgeToEdgeInsets(this);
         getSupportActionBar().hide();
         context = this;
-        SetMatchId();
-        ShowSaved();
-        Initialize();
         competition = new UserProfile(this).getFavourateLeague();
         ((TextView) findViewById(R.id.competitionName)).setText(competition.toString());
-    }
-    private void SetMatchId() {
-        Intent intent = getIntent();
-        competition = (String) intent.getSerializableExtra("competition");
-
+        ShowSaved();
+        Initialize();
     }
     public boolean ShowError()
     {
@@ -65,18 +60,15 @@ public class news_activity extends AppCompatActivity {
             return;
 
 
-        dialog = new ProgressDialog(news_activity.this);
-        dialog.setMessage("Getting news");
-        dialog.setIndeterminate(true);
-        dialog.show();
+        Utility.ShowLoading(this);
         final Thread eThread = new Thread(new Runnable() {
             @Override
             public void run() {
 
-                //SuperSport superSport = new SuperSport();
+                NewsClient newsClient = new NewsClient();
                 final ArrayList<NewsItem> comments; ArrayList<NewsItem> holder = null;
                 try {
-                    //holder = superSport.GetNews( competition);
+                    holder = newsClient.GetNews(competition);
 
                 }
                 catch (Exception ex)
@@ -92,7 +84,7 @@ public class news_activity extends AppCompatActivity {
                 if(comments != null) {
                     runOnUiThread(new Runnable() {
                         public void run() {
-                            dialog.hide();
+                            Utility.HideLoading(news_activity.this);
                             ShowNews(comments,false);
                             new LeagueSavedState(context).SaveNews(competition,comments);
                         }
@@ -114,7 +106,7 @@ public class news_activity extends AppCompatActivity {
             TextView empty = (TextView) findViewById(R.id.comm_empty);
             commentaryListView.setEmptyView(empty);
             if(!saved) {
-                ((TextView)findViewById(R.id.title)).setText("Log(online)");
+                ((TextView)findViewById(R.id.title)).setText("News(online)");
             }
 
             commentaryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -150,36 +142,45 @@ public class news_activity extends AppCompatActivity {
     }
     public boolean loadImageFromURL(String fileUrl,
                                    final ImageView iv){
-        try {
+        // Network I/O must never run on the calling thread if it's the UI thread (ANR risk),
+        // and the resulting bitmap must never be applied to the view off the UI thread either
+        // - this method used to do the fetch inline on whichever thread called it (sometimes
+        // a background thread, in which case setImageBitmap() itself ran off the UI thread).
+        // Always fetching on a fresh thread and posting the result back to the view is
+        // thread-safe regardless of which thread calls this method.
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL myFileUrl = new URL(fileUrl);
+                    HttpURLConnection conn = (HttpURLConnection) myFileUrl.openConnection();
+                    conn.setDoInput(true);
+                    conn.connect();
 
-            URL myFileUrl = new URL (fileUrl);
-            HttpURLConnection conn =
-                    (HttpURLConnection) myFileUrl.openConnection();
-            conn.setDoInput(true);
-            conn.connect();
+                    final InputStream is = conn.getInputStream();
+                    final android.graphics.Bitmap bitmap = BitmapFactory.decodeStream(is);
+                    iv.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            iv.setImageBitmap(bitmap);
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
-           final InputStream is = conn.getInputStream();
-            //runOnUiThread(new Runnable() {
-              //  public void run() {
-                    iv.setImageBitmap(BitmapFactory.decodeStream(is));
-              //  }});
-
-                return true;
-
-            }catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
+        return true;
     }
     private void GoToCommentry(NewsItem match)
     {
-        Intent intent = new Intent(this, activity_news_article.class);
-        intent.putExtra("article", match);
-
-
-        startActivity(intent);
+        // activity_news_article was a stub that never actually fetched the article body -
+        // its "Please wait..." dialog never got dismissed, leaving every tap on a permanent
+        // hang. Google News RSS links already point at the full, readable article, so open
+        // that directly instead of a dead-end in-app screen.
+        if (match.link != null) {
+            startActivity(new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(match.link)));
+        }
     }
 }

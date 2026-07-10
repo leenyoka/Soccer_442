@@ -11,4 +11,6 @@ public class Player {
     public String nationality;
     public String section;
     public String lastUpdated;
+    public String photoUrl;
+    public String shortName;
 }
